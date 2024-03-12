@@ -1,6 +1,5 @@
 using Engineless;
 
-// Test ECS
 namespace Examples {
     class Advanced {
         void StartupSystem(IECS ecs) {
@@ -11,7 +10,8 @@ namespace Examples {
             });
         }
     
-        void SuperSystem(Query<(DuckAspects, Counter)> q) {
+        void SuperSystem(Res<DuckAspects> d, Query<(DuckAspects, Counter)> q) {
+            Console.WriteLine("The resource DuckAspects exists!: " + d.hit.greatQuack);
             foreach (var hit in q.hits) {
                 var (duckAspects, counter) = hit.Value;
                 Console.WriteLine("Quack: " + duckAspects.greatQuack);
@@ -26,6 +26,7 @@ namespace Examples {
             ecs.AddEntity(new List<Object>() {
                 new DuckAspects() { greatQuack = "kvitter kvitter 🐔" },
             });
+            ecs.SetResource(new DuckAspects { greatQuack = "GREAT eagel 🦃" });
             ecs.AddSystem(Event.Startup, StartupSystem);
             ecs.AddSystem(Event.Update, SuperSystem);
             ecs.Start();

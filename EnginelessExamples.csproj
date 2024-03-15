@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../engineless/Engineless.csproj" />
+    <ProjectReference Include="../Engineless/Engineless.csproj" />
   </ItemGroup>
 
 </Project>
